@@ -1,7 +1,10 @@
 package kata.supermarket.pricing;
 
+import kata.supermarket.model.Article;
 import kata.supermarket.model.Item;
 
 public interface IPrice {
-    abstract float computePrice(Item item);
+    float computePrice(Item item);
+
+    float getUnitaryPrice(Article cup);
 }

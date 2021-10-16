@@ -27,6 +27,13 @@ public class PriceTest {
         Item item = new Item(cup, 6);
         float expected = 2f;
         Assert.assertEquals(expected, price.computePrice(item), delta);
+    }
 
+    @Test
+    public void testGetUnitaryPrice() {
+        price = new Price();
+        Article cup = new Article("SKU-000000001", "Cup", 3, 12);
+        float expected = 4f;
+        Assert.assertEquals(expected, price.getUnitaryPrice(cup), delta);
     }
 }

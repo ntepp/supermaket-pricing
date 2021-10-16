@@ -1,4 +1,4 @@
-package kata.supermarket.pricing;
+package kata.supermarket.discount;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +7,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class Discount {
     private String sku;
-    private float quantity;
+    private boolean byPercentage;
+    private float percentage;
+    private float quantityBought;
     private float quantityFree;
 }
