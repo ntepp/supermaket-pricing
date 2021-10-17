@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Discount {
-    private String sku;
+    private String code;
     private boolean byPercentage;
     private float percentage;
     private float quantityBought;

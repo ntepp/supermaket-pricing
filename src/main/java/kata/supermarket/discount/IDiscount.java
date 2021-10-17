@@ -8,4 +8,6 @@ public interface IDiscount {
     float computeDiscountPercentage(Discount discount);
 
     boolean isDiscountApplicable(Item item, Discount discount);
+
+    void addDiscount(Discount discount);
 }

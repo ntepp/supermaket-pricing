@@ -6,13 +6,23 @@ import lombok.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class DiscountManager implements IDiscount {
-
+    private static DiscountManager instance;
     private final List<Discount> discountList = new ArrayList<>();
 
+    private DiscountManager() {
+    }
+
+    /**
+     * Apply discount on Item
+     * @param item
+     * @param discount
+     * @return
+     */
     @Override
-    public float apply(Item item, Discount discount) {
+    public float apply(@NonNull Item item, @NonNull Discount discount) {
         if (isDiscountApplicable(item, discount)) {
             Price price = new Price();
             float totalPrice = price.getUnitaryPrice(item.getArticle()) * item.getQuantity();
@@ -39,14 +49,22 @@ public class DiscountManager implements IDiscount {
     }
 
     @Override
-    public boolean isDiscountApplicable(Item item, Discount discount) {
+    public boolean isDiscountApplicable(@NonNull Item item, @NonNull Discount discount) {
         if (!discountList.isEmpty() && item.getQuantity() >= discount.getQuantityBought()) {
-            return discountList.stream().anyMatch(d -> d.getSku().equalsIgnoreCase(item.getArticle().getSku()));
+            return discountList.stream().anyMatch(d -> d.getCode().equalsIgnoreCase(item.getArticle().getDiscountCode()));
         }
         return false;
     }
 
+    @Override
     public void addDiscount(Discount discount) {
         discountList.add(discount);
+    }
+
+    public static DiscountManager getInstance() {
+        if (Objects.isNull(instance)) {
+            instance = new DiscountManager();
+        }
+        return instance;
     }
 }
