@@ -1,6 +1,5 @@
 package kata.supermarket.pricing;
 
-import junit.framework.TestCase;
 import kata.supermarket.model.Article;
 import kata.supermarket.model.Item;
 import org.junit.Assert;

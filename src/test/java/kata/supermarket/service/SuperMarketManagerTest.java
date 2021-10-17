@@ -15,9 +15,11 @@ public class SuperMarketManagerTest {
 
     @Test
     public void applyPromotion() {
+
     }
 
     @Test
     public void computeBill() {
+
     }
 }

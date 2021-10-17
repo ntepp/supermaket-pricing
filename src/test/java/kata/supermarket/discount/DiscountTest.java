@@ -1,14 +1,9 @@
 package kata.supermarket.discount;
 
-import kata.supermarket.discount.Discount;
-import kata.supermarket.discount.DiscountManager;
-import kata.supermarket.discount.DiscountNotFoundException;
 import kata.supermarket.model.Article;
 import kata.supermarket.model.Item;
 import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class DiscountTest {
     Discount discount;

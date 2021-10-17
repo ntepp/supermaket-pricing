@@ -1,7 +1,6 @@
 package kata.supermarket.service;
 
 import kata.supermarket.discount.Discount;
-import kata.supermarket.discount.DiscountManager;
 import kata.supermarket.model.Article;
 import kata.supermarket.model.Cart;
 import lombok.Data;
@@ -17,15 +16,15 @@ public class SuperMarketManager {
     private final List<Article> articleList = new ArrayList<>();
 
     void addDiscount(Discount discount) {
-
+        discountList.add(discount);
     }
 
     void applyPromotion(Article article, Discount discount) {
-
+        // TODO: apply discount to article
     }
 
     void computeBill(Cart cart) {
-
+        // TODO: comput bill from cart
     }
 
     public static SuperMarketManager getInstance() {
