@@ -1,30 +1,32 @@
 package kata.supermarket.service;
 
 import kata.supermarket.discount.Discount;
+import kata.supermarket.discount.DiscountManager;
 import kata.supermarket.model.Article;
-import kata.supermarket.model.Cart;
+import kata.supermarket.model.Item;
+import kata.supermarket.pricing.Price;
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Data
 public class SuperMarketManager {
     private static SuperMarketManager instance;
-    private final List<Discount> discountList = new ArrayList<>();
+    DiscountManager discountManager = DiscountManager.getInstance();
+    Price price = new Price();
     private final List<Article> articleList = new ArrayList<>();
 
-    void addDiscount(Discount discount) {
-        discountList.add(discount);
-    }
-
-    void applyPromotion(Article article, Discount discount) {
-        // TODO: apply discount to article
-    }
-
-    void computeBill(Cart cart) {
-        // TODO: comput bill from cart
+    float computeBill(Cart cart) {
+        Map<String, Item> items = cart.getItems();
+        float sum = 0;
+        return items.entrySet().stream().map(item -> {
+            Optional<Discount> discount = discountManager.getDiscountFromCode(item.getValue().getArticle().getDiscountCode());
+            if(discount.isPresent()){
+                return discountManager.apply(item.getValue(), discount.get());
+            }else {
+                return price.computePrice(item.getValue());
+            }
+        }).reduce(sum, (a,b) -> a+b);
     }
 
     public static SuperMarketManager getInstance() {

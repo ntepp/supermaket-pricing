@@ -9,5 +9,5 @@ public interface IDiscount {
 
     boolean isDiscountApplicable(Item item, Discount discount);
 
-    void addDiscount(Discount discount);
+    void addDiscount(String code, Discount discount);
 }

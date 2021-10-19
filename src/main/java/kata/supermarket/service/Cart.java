@@ -1,5 +1,7 @@
-package kata.supermarket.model;
+package kata.supermarket.service;
 
+import kata.supermarket.model.Article;
+import kata.supermarket.model.Item;
 import lombok.Data;
 import lombok.NonNull;
 

@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 public class CartTest {
     public static final int QUANTITY_ONE = 1;
     public static final int QUANTITY_THREE = 3;
-    Cart cart = new Cart();
+    private Cart cart = new Cart();
 
     @Test
     public void addToCart_should_add_one_item() {

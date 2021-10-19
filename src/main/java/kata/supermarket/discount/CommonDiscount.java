@@ -3,7 +3,7 @@ package kata.supermarket.discount;
 import lombok.Data;
 
 @Data
-public class CustomDiscount {
+public class CommonDiscount {
     private String code;
     private float percentage;
 }

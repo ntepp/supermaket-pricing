@@ -4,19 +4,18 @@ import kata.supermarket.model.Item;
 import kata.supermarket.pricing.Price;
 import lombok.NonNull;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class DiscountManager implements IDiscount {
     private static DiscountManager instance;
-    private final List<Discount> discountList = new ArrayList<>();
+    private final Map<String, Discount> discountMap = new HashMap<>();
 
     private DiscountManager() {
     }
 
     /**
      * Apply discount on Item
+     *
      * @param item
      * @param discount
      * @return
@@ -50,15 +49,21 @@ public class DiscountManager implements IDiscount {
 
     @Override
     public boolean isDiscountApplicable(@NonNull Item item, @NonNull Discount discount) {
-        if (!discountList.isEmpty() && item.getQuantity() >= discount.getQuantityBought()) {
-            return discountList.stream().anyMatch(d -> d.getCode().equalsIgnoreCase(item.getArticle().getDiscountCode()));
-        }
-        return false;
+        return Optional.ofNullable(discountMap.get(item.getArticle().getDiscountCode())).isPresent();
     }
 
     @Override
-    public void addDiscount(Discount discount) {
-        discountList.add(discount);
+    public void addDiscount(String code, Discount discount) {
+        discountMap.put(code, discount);
+    }
+
+
+    public void clear() {
+        discountMap.clear();
+    }
+
+    public Optional<Discount> getDiscountFromCode(String discountCode) {
+        return Optional.ofNullable(discountMap.get(discountCode));
     }
 
     public static DiscountManager getInstance() {
