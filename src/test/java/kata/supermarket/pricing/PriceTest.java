@@ -6,8 +6,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class PriceTest {
-    Price price;
-    Double delta = 0.00002;
+    private Price price;
+    private Double delta = 0.00002;
 
     @Test
     public void testComputePriceDefault() {

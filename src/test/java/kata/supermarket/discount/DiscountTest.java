@@ -6,17 +6,20 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class DiscountTest {
-    Discount discount;
-    DiscountManager discountManager;
-    Double delta = 0.002;
+    public static final String SKU_000000001 = "SKU-000000001";
+    public static final String XMASS = "NOEL";
+    public static final String CUP = "Cup";
+    private Discount discount;
+    private DiscountManager discountManager;
+    private Double delta = 0.002;
 
     @Test
     public void testDiscount() {
-        discount = new Discount("NOEL", false, 0, 2, 1);
+        discount = new Discount(XMASS, false, 0, 2, 1);
         discountManager = DiscountManager.getInstance();
-        discountManager.addDiscount(discount);
-        Article cup = new Article("SKU-000000001", "Cup", 1, 10);
-        cup.setDiscountCode("NOEL");
+        discountManager.addDiscount(XMASS, discount);
+        Article cup = new Article(SKU_000000001, CUP, 1, 10);
+        cup.setDiscountCode(XMASS);
         Item item = new Item(cup, 6);
         float expected = 40f;
         Assert.assertEquals(expected, discountManager.apply(item, discount), delta);
@@ -24,9 +27,9 @@ public class DiscountTest {
 
     @Test
     public void testDiscount_NotFound() throws Exception {
-        discount = new Discount("SKU-000000001", false, 0, 2, 1);
+        discount = new Discount(SKU_000000001, false, 0, 2, 1);
         discountManager = DiscountManager.getInstance();
-        Article cup = new Article("SKU-000000001", "Cup", 1, 10);
+        Article cup = new Article(SKU_000000001, CUP, 1, 10);
         Item item = new Item(cup, 3);
         DiscountNotFoundException exception = Assert.assertThrows(DiscountNotFoundException.class, () -> discountManager.apply(item, discount));
         Assert.assertEquals("Discount does not exist", exception.getMessage());
@@ -34,7 +37,7 @@ public class DiscountTest {
 
     @Test
     public void testDiscountPercentage() {
-        discount = new Discount("SKU-000000001", false, 0, 2, 1);
+        discount = new Discount(SKU_000000001, false, 0, 2, 1);
         discountManager = DiscountManager.getInstance();
         float expected = 0.333f;
         Assert.assertEquals(expected, discountManager.computeDiscountPercentage(discount), delta);
@@ -44,8 +47,8 @@ public class DiscountTest {
     public void testDiscountApplicable() {
         discountManager = DiscountManager.getInstance();
         discount = new Discount("HAPPY_NEW_YEAR", false, 0, 3, 1);
-        discountManager.addDiscount(discount);
-        Article cup = new Article("SKU-000000001", "Cup", 5, 10, "HAPPY_NEW_YEAR");
+        discountManager.addDiscount(discount.getCode(), discount);
+        Article cup = new Article(SKU_000000001, CUP, 5, 10, "HAPPY_NEW_YEAR");
         Item item = new Item(cup, 5);
         Assert.assertTrue(discountManager.isDiscountApplicable(item, discount));
     }
