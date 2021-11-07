@@ -6,6 +6,7 @@ import kata.supermarket.model.Item;
 import kata.supermarket.pricing.Price;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 @Data
@@ -17,20 +18,21 @@ public class SuperMarketManager {
 
     /**
      * compute bill for the given card
+     *
      * @param cart
      * @return
      */
-    float computeBill(Cart cart) {
+    BigDecimal computeBill(Cart cart) {
         Map<String, Item> items = cart.getItems();
-        float sum = 0;
+        BigDecimal sum = BigDecimal.valueOf(0);
         return items.entrySet().stream().map(item -> {
             Optional<Discount> discount = discountManager.getDiscountFromCode(item.getValue().getArticle().getDiscountCode());
-            if(discount.isPresent()){
+            if (discount.isPresent()) {
                 return discountManager.apply(item.getValue(), discount.get());
-            }else {
+            } else {
                 return price.computePrice(item.getValue());
             }
-        }).reduce(sum, (a,b) -> a+b);
+        }).reduce(sum, (a, b) -> a.add(b));
     }
 
     public static SuperMarketManager getInstance() {

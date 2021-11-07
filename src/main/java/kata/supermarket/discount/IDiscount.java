@@ -2,8 +2,10 @@ package kata.supermarket.discount;
 
 import kata.supermarket.model.Item;
 
+import java.math.BigDecimal;
+
 public interface IDiscount {
-    float apply(Item item, Discount discount);
+    BigDecimal apply(Item item, Discount discount);
 
     float computeDiscountPercentage(Discount discount);
 
