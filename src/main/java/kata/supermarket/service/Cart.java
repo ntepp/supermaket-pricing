@@ -17,6 +17,7 @@ public class Cart {
 
     /**
      * Add x=quantity article to cart
+     *
      * @param article
      * @param quantity
      */
@@ -32,6 +33,7 @@ public class Cart {
 
     /**
      * remove one or many occurrences of one article in item list
+     *
      * @param article
      * @param quantity
      */

@@ -3,6 +3,7 @@ package kata.supermarket.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.math.BigDecimal;
 
 
 @Data
@@ -11,10 +12,10 @@ public class Article {
     private String sku;
     private String name;
     private float quantity;
-    private float price;
+    private BigDecimal price;
     private String discountCode;
 
-    public Article(String sku, String name, float quantity, float price) {
+    public Article(String sku, String name, float quantity, BigDecimal price) {
         this.sku = sku;
         this.name = name;
         this.quantity = quantity;

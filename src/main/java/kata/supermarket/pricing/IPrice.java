@@ -3,8 +3,10 @@ package kata.supermarket.pricing;
 import kata.supermarket.model.Article;
 import kata.supermarket.model.Item;
 
-public interface IPrice {
-    float computePrice(Item item);
+import java.math.BigDecimal;
 
-    float getUnitaryPrice(Article cup);
+public interface IPrice {
+    BigDecimal computePrice(Item item);
+
+    BigDecimal getUnitaryPrice(Article cup);
 }

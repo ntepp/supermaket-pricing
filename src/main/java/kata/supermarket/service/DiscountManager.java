@@ -7,6 +7,7 @@ import kata.supermarket.model.Item;
 import kata.supermarket.pricing.Price;
 import lombok.NonNull;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 public class DiscountManager implements IDiscount {
@@ -24,17 +25,17 @@ public class DiscountManager implements IDiscount {
      * @return
      */
     @Override
-    public float apply(@NonNull Item item, @NonNull Discount discount) {
+    public BigDecimal apply(@NonNull Item item, @NonNull Discount discount) {
         if (isDiscountApplicable(item, discount)) {
             Price price = new Price();
-            float totalPrice = price.getUnitaryPrice(item.getArticle()) * item.getQuantity();
-            float reduction;
+            BigDecimal totalPrice = price.getUnitaryPrice(item.getArticle()).multiply(BigDecimal.valueOf(item.getQuantity()));
+            BigDecimal reduction;
             if (!discount.isByPercentage() && discount.getQuantityBought() > item.getQuantity()) {
-                reduction = 0;
+                reduction = BigDecimal.valueOf(0);
             } else {
-                reduction = totalPrice * computeDiscountPercentage(discount);
+                reduction = totalPrice.multiply(BigDecimal.valueOf(computeDiscountPercentage(discount)));
             }
-            return totalPrice - reduction;
+            return totalPrice.subtract(reduction);
         } else {
             throw new DiscountNotFoundException("Discount does not exist");
         }
@@ -42,6 +43,7 @@ public class DiscountManager implements IDiscount {
 
     /**
      * Compute discount by percentage
+     *
      * @param discount
      * @return
      */
