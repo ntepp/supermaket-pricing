@@ -1,3 +1,5 @@
+![](https://github.com/ntepp/supermaket-pricing/actions/workflows/maven.yml/badge.svg)
+
 # Supermarket Pricing
 
 The problem domain is something seemingly simple: pricing goods at supermarkets.
