@@ -1,5 +1,8 @@
-package kata.supermarket.discount;
+package kata.supermarket.service;
 
+import kata.supermarket.discount.Discount;
+import kata.supermarket.discount.DiscountNotFoundException;
+import kata.supermarket.discount.IDiscount;
 import kata.supermarket.model.Item;
 import kata.supermarket.pricing.Price;
 import lombok.NonNull;
@@ -37,6 +40,11 @@ public class DiscountManager implements IDiscount {
         }
     }
 
+    /**
+     * Compute discount by percentage
+     * @param discount
+     * @return
+     */
     @Override
     public float computeDiscountPercentage(@NonNull Discount discount) {
         final float sumQuantityFreeAndFree = discount.getQuantityBought() + discount.getQuantityFree();

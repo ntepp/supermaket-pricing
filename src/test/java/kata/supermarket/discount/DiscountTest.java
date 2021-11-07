@@ -2,6 +2,7 @@ package kata.supermarket.discount;
 
 import kata.supermarket.model.Article;
 import kata.supermarket.model.Item;
+import kata.supermarket.service.DiscountManager;
 import org.junit.Assert;
 import org.junit.Test;
 

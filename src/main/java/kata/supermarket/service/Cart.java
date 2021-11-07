@@ -15,6 +15,11 @@ public class Cart {
         this.items = new HashMap<>();
     }
 
+    /**
+     * Add x=quantity article to cart
+     * @param article
+     * @param quantity
+     */
     void addToCart(Article article, float quantity) {
         if (items.containsKey(article.getSku())) {
             Item item = items.get(article.getSku());
@@ -25,6 +30,11 @@ public class Cart {
         }
     }
 
+    /**
+     * remove one or many occurrences of one article in item list
+     * @param article
+     * @param quantity
+     */
     void removeFromCart(Article article, float quantity) {
         if (items.containsKey(article.getSku())) {
             Item item = items.get(article.getSku());

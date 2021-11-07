@@ -1,7 +1,6 @@
 package kata.supermarket.service;
 
 import kata.supermarket.discount.Discount;
-import kata.supermarket.discount.DiscountManager;
 import kata.supermarket.model.Article;
 import kata.supermarket.model.Item;
 import kata.supermarket.pricing.Price;
@@ -16,6 +15,11 @@ public class SuperMarketManager {
     Price price = new Price();
     private final List<Article> articleList = new ArrayList<>();
 
+    /**
+     * compute bill for the given card
+     * @param cart
+     * @return
+     */
     float computeBill(Cart cart) {
         Map<String, Item> items = cart.getItems();
         float sum = 0;

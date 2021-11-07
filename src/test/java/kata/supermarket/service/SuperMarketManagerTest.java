@@ -1,9 +1,7 @@
 package kata.supermarket.service;
 
 import kata.supermarket.discount.Discount;
-import kata.supermarket.discount.DiscountManager;
 import kata.supermarket.model.Article;
-import kata.supermarket.model.Item;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -31,7 +29,7 @@ public class SuperMarketManagerTest {
     }
 
     @Test
-    public void computeBill_withoutDiscountPercentage() {
+    public void computeBill_withDiscountPercentage() {
         Article pen = new Article("SKU-000000001", "Pen", QUANTITY_ONE, 2.5f);
         Article book = new Article("SKU-000000002", "Book", QUANTITY_ONE, 50f);
         Discount discount = new Discount(PROMO_001,true,0.5f,0,0);
@@ -46,6 +44,7 @@ public class SuperMarketManagerTest {
         Assert.assertEquals(30, totalPrice, 0.0002);
     }
 
+    // Test buy 2, get 1. Test when customer buy 1
     @Test
     public void computeBill_withoutDiscountPackaged_0() {
         Article pen = new Article("SKU-000000001", "Pen", QUANTITY_ONE, 2.5f);
@@ -62,6 +61,7 @@ public class SuperMarketManagerTest {
         Assert.assertEquals(57.5, totalPrice, 0.0002);
     }
 
+    // Test buy 2, get 1. Test when customer buy more than 2
     @Test
     public void computeBill_withoutDiscountPackaged() {
         Article pen = new Article("SKU-000000001", "Pen", QUANTITY_ONE, 2.5f);
